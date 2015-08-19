@@ -29,6 +29,7 @@ The user will need to find shrines to pray at in order to learn new spells.  Spe
 2. Speed boost <-> Tangle or Slow spell
 3. Burn <-> Chill
 4. Electric <-> Discharge
+5. Poison (DoT) <-> Heal (-DoT)
 
 ## Battles
 1. Real-time on the map.  Tile-based movement
