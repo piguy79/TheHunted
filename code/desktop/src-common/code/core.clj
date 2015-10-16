@@ -6,7 +6,7 @@
             [play-clj.g2d-physics :as physics]))
 
 
-(declare code-game main-screen)
+(declare thehunted-game main-screen)
 
 
 (defn update-camera!
@@ -47,7 +47,7 @@
   (fn [screen entities]
     (cond
       (= (:key screen) (key-code :r))
-      (on-gl (set-screen! code-game main-screen)))
+      (on-gl (set-screen! thehunted-game main-screen)))
     entities))
 
 
@@ -65,4 +65,4 @@
                        (try (screen-fn)
                          (catch Exception e
                            (.printStackTrace e)              
-                           (set-screen! code-game blank-screen)))))
+                           (set-screen! thehunted-game blank-screen)))))
