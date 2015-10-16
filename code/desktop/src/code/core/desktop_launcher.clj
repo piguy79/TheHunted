@@ -7,5 +7,5 @@
 
 (defn -main
   []
-  (LwjglApplication. code-game "code" 800 600)
+  (LwjglApplication. thehunted-game "TheHunted" 1000 700)
   (Keyboard/enableRepeatEvents true))

@@ -51,7 +51,7 @@
     entities))
 
 
-(defgame code-game
+(defgame thehunted-game
   :on-create
   (fn [this]
     (set-screen! this main-screen)))
