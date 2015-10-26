@@ -113,8 +113,14 @@
 
 
 (defn move
-  [{:keys [delta-time]} entities {:keys [x y max-velocity] :as entity}]
-  (let [[x-velocity y-velocity] (get-velocity entity)]
-    (physics/body-x! entity (+ x x-velocity))
-    (physics/body-y! entity (+ y y-velocity)))
+  [{:keys [delta-time] :as screen} 
+   {:keys [x y max-velocity] :as entity}]
+  (let [[x-velocity y-velocity] (get-velocity entity)
+        new-x (+ x x-velocity)
+        new-y (+ y y-velocity)
+        layer (tiled-map-layer screen "water")
+        cell (tiled-map-cell layer new-x new-y)]
+    (when (nil? cell)
+      (physics/body-x! entity new-x)
+      (physics/body-y! entity new-y)))
   entity)

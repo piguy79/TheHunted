@@ -34,7 +34,7 @@
          (map (fn [entity]
                 (->> entity
                      (e/update-patrol-locations!)
-                     (e/move screen entities))))
+                     (e/move screen))))
          (render! screen)
          (physics/step! screen)
          (update-camera! screen)))
