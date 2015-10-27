@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="8" tileheight="8">
- <tileset firstgid="1" name="tiles" tilewidth="8" tileheight="8">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="8" tileheight="8" nextobjectid="1">
+ <tileset firstgid="1" name="tiles" tilewidth="8" tileheight="8" tilecount="256">
   <image source="tiles.png" width="128" height="128"/>
  </tileset>
  <layer name="grass" width="50" height="50">
@@ -16,6 +16,11 @@
  <layer name="desert" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJztlktuwkAQROf+O7PIPjY+AMoFQwuX/FKaKJ/FMEj1pBZgGNTVv+nWQgghhBBCCCGEEEIIIYRAlrtdYG/Pdeff3O623u162N6+1yLNs/LeHlq29tBRr65laafeGSn/5Hv5uOKV9bbj+YxULkpD+bcftuKZao2/mZHqj4/D1CNbO/MjXTtsdkqTYq9eYc3JXoGqM/nPGTZ7XTmlQ/6v7escezUdXkfSopyMwu/ov9zTygd75Nqe0x/ui/z5SYvuEp1VLfl/jYJ3gnz4zc7BftD7HWdH5+PWzrrm7JQvXnMX+N07R32j524vJ4wvfeZMYv64b3EWj2IxH9xUJ/S7V4M0fj9KA+PN2LLmvWY8/r7/8uwIDdzzOCsZf8aXs8j3KK+pUTq0U/TuYN8z+Nn7wXMxuj90b3g8fc+Qtt48Y56okc9H6eBu533Kubqa+dmt8/v6/AkDTt0e
+  </data>
+ </layer>
+ <layer name="trees" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0sEJwCAQRFFbiB2Y/ovUiyDeA5nlPRi2gL+tAQBAlmetHzfVWHuPm0yT/7hbpDa5W1RqkqpCiwrS/2jzRwAAAADAVyY7xQP9
   </data>
  </layer>
 </map>
