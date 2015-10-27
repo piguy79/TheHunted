@@ -52,7 +52,7 @@
   [screen]
   (let [entity (assoc (create-person)
           :body (create-player-body! screen)
-          :max-velocity 0.3
+          :max-velocity 0.25
           :player? true
           :x 40
           :y 40)]
@@ -80,8 +80,9 @@
     :else entity))
 
 (defn set-direction-based-on-key!
-  [entity]
+  [{:keys [direction] :as entity}]
   (cond
+    (not (nil? direction)) entity
     (key-pressed? :dpad-left) (assoc entity :direction :left)
     (key-pressed? :dpad-right) (assoc entity :direction :right)
     (key-pressed? :dpad-up) (assoc entity :direction :up)
@@ -94,12 +95,6 @@
     player? (set-direction-based-on-key! entity)
     :else entity))
 
-(defn set-player-direction!
-  [entities]
-  (let [player (find-first :player? entities)]
-    (cond
-      (nil? (:direction player)) (map set-direction! entities)
-      :else entities)))
 
 (defn remove-direction!
   [{:keys [player?] :as entity}]

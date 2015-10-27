@@ -59,7 +59,7 @@
       (movement-key? (:key screen))
       (->> entitites
            (map e/remove-direction!)
-           (e/set-player-direction!))
+           (map e/set-direction!))
       :else entitites))
   
   :on-key-down
