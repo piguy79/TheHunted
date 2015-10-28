@@ -18,7 +18,11 @@
         up-flip (texture up :flip true false)
         stand-flip (texture stand-right :flip true false)
         walk-flip (texture walk-right :flip true false)]
-    (create start-layer down)))) 
+    (assoc (create start-layer down)
+           :down (animation 0.2 [down down-flip])
+           :up (animation 0.2 [up up-flip])
+           :right (animation 0.2 [stand-right walk-right])
+           :left (animation 0.2 [stand-flip walk-flip]))))) 
 
 ;; Need to load a texture and set its left and right
 ;; Give velocity property and set on the grass layer
@@ -154,3 +158,17 @@
       (physics/body-x! entity new-x)
       (physics/body-y! entity new-y)))
   entity)
+
+
+(defn ^:private animate-player
+  [screen {:keys [direction] :as entity}]
+  (if-let [anim (get entity direction)]
+    (merge entity
+           (animation->texture screen anim))
+    entity))
+
+(defn animate
+  [screen {:keys [player?] :as entity}]
+  (cond
+    player? (animate-player screen entity)
+    :else entity))

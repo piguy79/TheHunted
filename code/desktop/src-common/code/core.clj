@@ -43,7 +43,8 @@
          (map (fn [entity]
                 (->> entity
                      (e/update-patrol-locations!)
-                     (e/move screen))))
+                     (e/move screen)
+                     (e/animate screen))))
          (render! screen)
          (physics/step! screen)
          (update-camera! screen)))
@@ -69,7 +70,7 @@
          ((on-gl (set-screen! thehunted-game main-screen))
           entities)
       (movement-key? (:key screen))
-         (e/set-player-direction! entities)
+         (map e/set-direction! entities)
       :else entities)))
 
 
