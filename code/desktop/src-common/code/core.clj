@@ -8,6 +8,15 @@
 
 (declare thehunted-game main-screen)
 
+(def movement-keys [(key-code :dpad-left)
+                    (key-code :dpad-right)
+                    (key-code :dpad-up)
+                    (key-code :dpad-down)])
+
+(defn movement-key?
+  [key]
+  (pos? (count (filter #(= % key) movement-keys))))
+
 
 (defn update-camera!
   [screen entities]
@@ -43,12 +52,25 @@
   (fn [screen entities]
     (height! screen 30))
 
+
+  :on-key-up
+  (fn [screen entitites]
+    (cond
+      (movement-key? (:key screen))
+      (->> entitites
+           (map e/remove-direction!)
+           (map e/set-direction!))
+      :else entitites))
+  
   :on-key-down
   (fn [screen entities]
     (cond
       (= (:key screen) (key-code :r))
-      (on-gl (set-screen! thehunted-game main-screen)))
-    entities))
+         ((on-gl (set-screen! thehunted-game main-screen))
+          entities)
+      (movement-key? (:key screen))
+         (e/set-player-direction! entities)
+      :else entities)))
 
 
 (defgame thehunted-game

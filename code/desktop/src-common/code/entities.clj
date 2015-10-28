@@ -52,7 +52,7 @@
   [screen]
   (let [entity (assoc (create-person)
           :body (create-player-body! screen)
-          :max-velocity 0.2
+          :max-velocity 0.25
           :player? true
           :x 40
           :y 40)]
@@ -79,16 +79,38 @@
     enemy? (assoc entity :target-location {:x (+ starting-x (:width bounds)) :y 45})
     :else entity))
 
+(defn set-direction-based-on-key!
+  [{:keys [direction] :as entity}]
+  (cond
+    (not (nil? direction)) entity
+    (key-pressed? :dpad-left) (assoc entity :direction :left)
+    (key-pressed? :dpad-right) (assoc entity :direction :right)
+    (key-pressed? :dpad-up) (assoc entity :direction :up)
+    (key-pressed? :dpad-down) (assoc entity :direction :down)
+    :else entity))
+
+(defn set-direction!
+  [{:keys [player?] :as entity}]
+  (cond
+    player? (set-direction-based-on-key! entity)
+    :else entity))
+
+
+(defn remove-direction!
+  [{:keys [player?] :as entity}]
+  (cond
+    player? (dissoc entity :direction)
+    :else entity))
+
+
 (defn get-player-velocity
-  [{:keys [max-velocity]}]
-  [(cond
-      (key-pressed? :dpad-left) (* -1 max-velocity)
-      (key-pressed? :dpad-right) max-velocity
-      :else 0)
-    (cond
-      (key-pressed? dpad-up) max-velocity
-      (key-pressed? dpad-down) (* -1 max-velocity)
-      :else 0)])
+  [{:keys [direction max-velocity]}]
+  (cond
+    (= direction :left) [(* -1 max-velocity) 0]
+    (= direction :right) [max-velocity 0]
+    (= direction :up) [0 max-velocity]
+    (= direction :down) [0 (* -1 max-velocity)]
+    :else [0 0]))
 
 (defn target-location-reached?
   [{:keys [x y target-location]}]
