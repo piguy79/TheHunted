@@ -8,8 +8,12 @@
                  [neko/neko "3.2.0"]
                  [org.clojure-android/clojure "1.7.0-RC1" :use-resources true]
                  [play-clj "0.4.7"]]
-  :profiles {:dev {:dependencies [[org.clojure-android/tools.nrepl "0.2.6-lollipop"]]
-                   :android {:aot :all-with-unused}}
+
+  :plugins [[lein-droid "0.4.3"]]
+  :profiles {:default [:dev]
+             :dev [:android-common :android-user
+                   {:dependencies [[org.clojure-android/tools.nrepl "0.2.6-lollipop"]]
+                                    :android {:aot :all-with-unused}}]
              :release {:android
                        {;; Specify the path to your private
                         ;; keystore and the the alias of the
@@ -27,7 +31,9 @@
             
             :assets-paths ["../desktop/resources"]
             :native-libraries-paths ["libs"]
-            :target-version "15"
+            :target-version "23"
+            :multi-dex true
+            :multi-dex-proguard-conf-path "proguard.cfg"
             :aot-exclude-ns ["clojure.parallel" "clojure.core.reducers"
                              "cljs-tooling.complete" "cljs-tooling.info"
                              "cljs-tooling.util.analysis" "cljs-tooling.util.misc"
